@@ -335,13 +335,13 @@ if justice_toggle:
 #compute percentage passed in given year 
 passed_year = votes.filter(_.year == year).filter(_.Status.isin(["Pass","Pass*"])).count().execute()
 total_year= votes.filter(_.year == year).count().execute()
-year_passed = (passed_year/total_year*100).round(2)
+year_passed = round(passed_year/total_year*100,2)
 f"{year_passed}% Measures Passed in {year}"  
 
 #compute percentage passed over entire dataset
 passed = votes.filter(_.Status.isin(["Pass","Pass*"])).count().execute()
 total = votes.count().execute()
-overall_passed = (passed/total*100).round(2)
+overall_passed = round(passed/total*100,2)
 f"{overall_passed}% Measures Passed from 1988 - 2024 \n"  
 
 
