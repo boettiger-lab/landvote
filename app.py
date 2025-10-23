@@ -6,9 +6,9 @@ import altair as alt
 import os
 import pandas as pd
 import matplotlib.pyplot as plt
-from pandasai.llm.openai import OpenAI
-from pandasai import Agent
-from pandasai.responses.streamlit_response import StreamlitResponse
+# from pandasai.llm.openai import OpenAI
+# from pandasai import Agent
+# from pandasai.responses.streamlit_response import StreamlitResponse
 import leafmap.maplibregl as leafmap
 
 st.set_page_config(layout="wide",
@@ -41,9 +41,9 @@ COLORS = {
 
 
 ## chatbot
-llm = OpenAI(api_token=st.secrets["OPENAI_API_KEY"])
-df1 = pd.read_csv("data.csv")
-agent = Agent([df1], config={"verbose": True, "response_parser": StreamlitResponse, "llm": llm})
+# llm = OpenAI(api_token=st.secrets["OPENAI_API_KEY"])
+# df1 = pd.read_csv("data.csv")
+# agent = Agent([df1], config={"verbose": True, "response_parser": StreamlitResponse, "llm": llm})
 
 year = st.slider("Select a year", 1988, 2024, 2022, 1)
 
@@ -86,6 +86,7 @@ def get_passes(votes):
         .mutate(percent_passed=(_.passes / _.total).round(2),
                 color=ibis.case().when(_.party == "DEMOCRAT", COLORS["dem_blue"]).else_(COLORS["rep_red"]).end())
         .to_pandas())
+    
 
 
 # cumulative funding over time 
@@ -294,31 +295,31 @@ with st.sidebar:
     justice_toggle = st.toggle("Climate and Economic Justice")
     party_toggle = st.toggle("Political Parties")
 
-    st.divider()
+    # st.divider()
 
-    '''
-    ## Data Assistant (experimental)
+    # '''
+    # ## Data Assistant (experimental)
 
-    Ask questions about the LandVote data, like:
+    # Ask questions about the LandVote data, like:
 
-    - What are the top states for approved conservation funds?
-    - Plot the total funds spent in conservation each year.
-    - What city has approved the most funds in a single measure? What was the description of that vote?
-    - Which state has had largest number measures fail? What is that as a fraction of it's total measures?
-    '''
+    # - What are the top states for approved conservation funds?
+    # - Plot the total funds spent in conservation each year.
+    # - What city has approved the most funds in a single measure? What was the description of that vote?
+    # - Which state has had largest number measures fail? What is that as a fraction of it's total measures?
+    # '''
     
-    prompt = st.chat_input("Ask about the data")
-    if prompt:
-        with st.spinner():
-            resp = agent.chat(prompt)
-            if os.path.isfile('exports/charts/temp_chart.png'):
-                im = plt.imread('exports/charts/temp_chart.png')
-                st.image(im)
-                os.remove('exports/charts/temp_chart.png')
-            st.write(resp)
+    # prompt = st.chat_input("Ask about the data")
+    # if prompt:
+    #     with st.spinner():
+    #         resp = agent.chat(prompt)
+    #         if os.path.isfile('exports/charts/temp_chart.png'):
+    #             im = plt.imread('exports/charts/temp_chart.png')
+    #             st.image(im)
+    #             os.remove('exports/charts/temp_chart.png')
+    #         st.write(resp)
 
               
-m = leafmap.Map(style="positron", center=(-100, 40), zoom=3)
+m = leafmap.Map(style="positron", center=(-100, 40), zoom=3, use_message_queue=True)
 
 
 if social_toggle:
@@ -335,13 +336,13 @@ if justice_toggle:
 #compute percentage passed in given year 
 passed_year = votes.filter(_.year == year).filter(_.Status.isin(["Pass","Pass*"])).count().execute()
 total_year= votes.filter(_.year == year).count().execute()
-year_passed = (passed_year/total_year*100).round(2)
+year_passed = round(passed_year/total_year*100,2)
 f"{year_passed}% Measures Passed in {year}"  
 
 #compute percentage passed over entire dataset
 passed = votes.filter(_.Status.isin(["Pass","Pass*"])).count().execute()
 total = votes.count().execute()
-overall_passed = (passed/total*100).round(2)
+overall_passed = round(passed/total*100,2)
 f"{overall_passed}% Measures Passed from 1988 - 2024 \n"  
 
 
@@ -363,8 +364,8 @@ m.to_streamlit()
 
 
 # display charts
-df_passes = get_passes(votes)
-st.altair_chart(create_chart(df_passes, "percent_passed", "Percent Passed","% of Measures Passed", [COLORS["dem_blue"], COLORS["rep_red"]], chart_type="line"), use_container_width=True)
+# df_passes = get_passes(votes)
+# st.altair_chart(create_chart(df_passes, "percent_passed", "Percent Passed","% of Measures Passed", [COLORS["dem_blue"], COLORS["rep_red"]], chart_type="line"), use_container_width=True)
 
 df_funding = funding_chart(votes)
 st.altair_chart(create_chart(df_funding, "cumulative_funding", "Billions of Dollars", "Cumulative Funding", COLORS["dark_green"], chart_type="bar"), use_container_width=True)
