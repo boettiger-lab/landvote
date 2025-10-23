@@ -6,9 +6,9 @@ import altair as alt
 import os
 import pandas as pd
 import matplotlib.pyplot as plt
-from pandasai.llm.openai import OpenAI
-from pandasai import Agent
-from pandasai.responses.streamlit_response import StreamlitResponse
+# from pandasai.llm.openai import OpenAI
+# from pandasai import Agent
+# from pandasai.responses.streamlit_response import StreamlitResponse
 import leafmap.maplibregl as leafmap
 
 st.set_page_config(layout="wide",
@@ -41,9 +41,9 @@ COLORS = {
 
 
 ## chatbot
-llm = OpenAI(api_token=st.secrets["OPENAI_API_KEY"])
-df1 = pd.read_csv("data.csv")
-agent = Agent([df1], config={"verbose": True, "response_parser": StreamlitResponse, "llm": llm})
+# llm = OpenAI(api_token=st.secrets["OPENAI_API_KEY"])
+# df1 = pd.read_csv("data.csv")
+# agent = Agent([df1], config={"verbose": True, "response_parser": StreamlitResponse, "llm": llm})
 
 year = st.slider("Select a year", 1988, 2024, 2022, 1)
 
@@ -294,28 +294,28 @@ with st.sidebar:
     justice_toggle = st.toggle("Climate and Economic Justice")
     party_toggle = st.toggle("Political Parties")
 
-    st.divider()
+    # st.divider()
 
-    '''
-    ## Data Assistant (experimental)
+    # '''
+    # ## Data Assistant (experimental)
 
-    Ask questions about the LandVote data, like:
+    # Ask questions about the LandVote data, like:
 
-    - What are the top states for approved conservation funds?
-    - Plot the total funds spent in conservation each year.
-    - What city has approved the most funds in a single measure? What was the description of that vote?
-    - Which state has had largest number measures fail? What is that as a fraction of it's total measures?
-    '''
+    # - What are the top states for approved conservation funds?
+    # - Plot the total funds spent in conservation each year.
+    # - What city has approved the most funds in a single measure? What was the description of that vote?
+    # - Which state has had largest number measures fail? What is that as a fraction of it's total measures?
+    # '''
     
-    prompt = st.chat_input("Ask about the data")
-    if prompt:
-        with st.spinner():
-            resp = agent.chat(prompt)
-            if os.path.isfile('exports/charts/temp_chart.png'):
-                im = plt.imread('exports/charts/temp_chart.png')
-                st.image(im)
-                os.remove('exports/charts/temp_chart.png')
-            st.write(resp)
+    # prompt = st.chat_input("Ask about the data")
+    # if prompt:
+    #     with st.spinner():
+    #         resp = agent.chat(prompt)
+    #         if os.path.isfile('exports/charts/temp_chart.png'):
+    #             im = plt.imread('exports/charts/temp_chart.png')
+    #             st.image(im)
+    #             os.remove('exports/charts/temp_chart.png')
+    #         st.write(resp)
 
               
 m = leafmap.Map(style="positron", center=(-100, 40), zoom=3, use_message_queue=True)
