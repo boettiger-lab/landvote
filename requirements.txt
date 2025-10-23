@@ -70,7 +70,6 @@ langchain-openai==0.1.23
 langchain-text-splitters==0.2.4
 langsmith==0.1.110
 linkify-it-py==2.0.3
-maplibre @ git+https://github.com/eodaGmbH/py-maplibregl@f7a514d4db1d7df06f70c293be9e4f9f1bc23c12
 markdown-it-py==3.0.0
 MarkupSafe==2.1.5
 marshmallow==3.22.0
