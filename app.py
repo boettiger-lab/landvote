@@ -86,6 +86,7 @@ def get_passes(votes):
         .mutate(percent_passed=(_.passes / _.total).round(2),
                 color=ibis.case().when(_.party == "DEMOCRAT", COLORS["dem_blue"]).else_(COLORS["rep_red"]).end())
         .to_pandas())
+    
 
 
 # cumulative funding over time 
@@ -363,8 +364,8 @@ m.to_streamlit()
 
 
 # display charts
-df_passes = get_passes(votes)
-st.altair_chart(create_chart(df_passes, "percent_passed", "Percent Passed","% of Measures Passed", [COLORS["dem_blue"], COLORS["rep_red"]], chart_type="line"), use_container_width=True)
+# df_passes = get_passes(votes)
+# st.altair_chart(create_chart(df_passes, "percent_passed", "Percent Passed","% of Measures Passed", [COLORS["dem_blue"], COLORS["rep_red"]], chart_type="line"), use_container_width=True)
 
 df_funding = funding_chart(votes)
 st.altair_chart(create_chart(df_funding, "cumulative_funding", "Billions of Dollars", "Cumulative Funding", COLORS["dark_green"], chart_type="bar"), use_container_width=True)
