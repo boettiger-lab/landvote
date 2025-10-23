@@ -158,5 +158,5 @@ tippecanoe
 pandasai==2.3.0
 seaborn
 numpy==1.26.4
-leafmap
+leafmap==0.53.3
 pandas

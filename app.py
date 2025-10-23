@@ -318,7 +318,7 @@ with st.sidebar:
             st.write(resp)
 
               
-m = leafmap.Map(style="positron", center=(-100, 40), zoom=3)
+m = leafmap.Map(style="positron", center=(-100, 40), zoom=3, use_message_queue=True)
 
 
 if social_toggle:
