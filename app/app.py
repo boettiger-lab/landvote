@@ -44,8 +44,9 @@ if "mydata" not in set(current_tables):
         con.read_parquet(votes_parquet)
         .cast({"geom": "geometry"})
     )
+    tbl = get_unique_rows(tbl)  # drop multi-county measures with non-unanimous party labels
     con.create_table("mydata", tbl)
-
+    
 votes = con.table("mydata")
 
 with st.sidebar:

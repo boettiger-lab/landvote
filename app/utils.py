@@ -3,6 +3,22 @@ from ibis import _
 import altair as alt
 from variables import *
 
+def get_unique_rows(df):
+    # collapse multi-county measures to one row per landvote_id
+    unique_votes = (
+        df
+        .group_by("landvote_id")
+        .agg(
+            **{c: ibis._[c].first() for c in df.schema().names if c not in ("landvote_id", "county", "party")},
+            # if spans multiple counties -> set different name for county
+            county=ibis.ifelse(ibis._.county.nunique() > 1, "Multiple Counties", ibis._.county.first()), 
+             # if counties differ in parties -> assign other label to party 
+            party=ibis.ifelse(ibis._.party.nunique() > 1, "Mixed", ibis._.party.first()),
+        )
+    )
+    return unique_votes
+
+    
 def create_chart(df, y_column, ylab, title, color, chart_type="line"):
     # color encoding - color is a list or single value
     color_encoding = (
