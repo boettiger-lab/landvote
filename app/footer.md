@@ -24,3 +24,15 @@ For details on methodology, please refer to the our data processing code for [La
 - CDC 2020 Social Vulnerability Index by US Census Track. Data: https://source.coop/repositories/cboettig/social-vulnerability/description. License: Public Domain
 
 
+#### LLMs
+This app can use a selection of open-weights language models hosted on the National Research Platform (https://nrp.ai/documentation/userdocs/ai/llm-managed/), and Open Router (https://openrouter.ai/models).
+
+---
+
+### Why save your queries?
+Conservation researchers and practitioners are interested in **learning what matters most to our community**. 
+
+By saving your anonymous queries, we can identify which topics and areas are drawing the most attention, helping us improve future tools and data products to **better support conservation efforts**. We also save the LLM’s response to each query to monitor its accuracy and ensure the system is working as intended. 
+
+You can opt out at any time by disabling “Save query”.
+

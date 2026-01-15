@@ -124,3 +124,62 @@ party_pmtiles = (
     "https://minio.carlboettiger.info/public-election/"
     "county/county_political_parties_1988-2024.pmtiles"
 )
+
+
+from langchain_openai import ChatOpenAI
+import streamlit as st
+from langchain_openai.chat_models.base import BaseChatOpenAI
+
+## dockerized streamlit app wants to read from os.getenv(), otherwise use st.secrets
+import os
+api_key = os.getenv("NRP_API_KEY")
+if api_key is None:
+    api_key = st.secrets["NRP_API_KEY"]
+
+openrouter_api = os.getenv("OPENROUTER_API_KEY")
+if openrouter_api is None:
+    openrouter_api = st.secrets["OPENROUTER_API_KEY"]
+
+openrouter_endpoint="https://openrouter.ai/api/v1"
+nrp_endpoint="https://ellm.nrp-nautilus.io/v1"
+
+# don't use a provider that collects data
+data_policy = {
+    "provider": {
+        "data_collection": "deny"
+    }
+}
+
+llm_options = {
+    "devstral-2512": ChatOpenAI(
+        model="mistralai/devstral-2512:free",
+        api_key=openrouter_api,
+        base_url=openrouter_endpoint,
+        temperature=0,
+        extra_body=data_policy
+    ),
+
+    "trinity-mini": ChatOpenAI(
+        model="arcee-ai/trinity-mini:free",
+        api_key=openrouter_api,
+        base_url=openrouter_endpoint,
+        temperature=0,
+        extra_body=data_policy
+    ),
+
+    "nemotron-nano-9b-v2": ChatOpenAI(
+        model="nvidia/nemotron-nano-9b-v2:free",
+        api_key=openrouter_api,
+        base_url=openrouter_endpoint,
+        temperature=0,
+        extra_body=data_policy
+    ),
+    
+    "gemma-3-27b-it": ChatOpenAI(
+        model="gemma3",
+        api_key=api_key,
+        base_url=nrp_endpoint,
+        temperature=0
+    ),
+
+}
