@@ -17,3 +17,5 @@ This repository contains the source code for the [**LandVote LLM Decision-Suppor
 
 ## Description 
 An interactive decision-support and exploratory analysis tool for U.S. land conservation ballot measures, integrating the Trust for Public Land LandVote database with election, social vulnerability, and environmental datasets. The application combines a lightweight web interface with a open-weights language models to enable natural-language querying of conservation funding, voting outcomes, and jurisdictional trends.
+
+[![DOI](https://zenodo.org/badge/1082074799.svg)](https://doi.org/10.5281/zenodo.18500783)
