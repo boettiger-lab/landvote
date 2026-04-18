@@ -1,5 +1,5 @@
-votes_pmtiles = "https://minio.carlboettiger.info/public-tpl/landvote/landvote_party.pmtiles"
-votes_parquet = "https://minio.carlboettiger.info/public-tpl/landvote/landvote_party.parquet"
+votes_pmtiles = "https://minio.carlboettiger.info/public-tpl-streamlit/nvme/public-tpl/landvote/landvote_party.pmtiles"
+votes_parquet = "https://minio.carlboettiger.info/public-tpl-streamlit/nvme/public-tpl/landvote/landvote_party.parquet"
 
 colors = {
     "dark_orange": "#ab5601",
