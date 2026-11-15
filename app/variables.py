@@ -1,5 +1,5 @@
-votes_pmtiles = "https://minio.carlboettiger.info/public-tpl-streamlit/nvme/public-tpl/landvote/landvote_party.pmtiles"
-votes_parquet = "https://minio.carlboettiger.info/public-tpl-streamlit/nvme/public-tpl/landvote/landvote_party.parquet"
+votes_pmtiles = "https://minio.carlboettiger.info/shared-tpl-streamlit/nvme/public-tpl/landvote/landvote_party.pmtiles"
+votes_parquet = "https://minio.carlboettiger.info/shared-tpl-streamlit/nvme/public-tpl/landvote/landvote_party.parquet"
 
 colors = {
     "dark_orange": "#ab5601",
@@ -121,7 +121,7 @@ sv_style = {
 }
 
 party_pmtiles = (
-    "https://minio.carlboettiger.info/public-election/"
+    "https://minio.carlboettiger.info/shared-election/"
     "county/county_political_parties_1988-2024.pmtiles"
 )
 
