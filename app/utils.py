@@ -451,7 +451,7 @@ if minio_secret is None:
 
 def minio_logger(consent, query, sql_query, llm_explanation, llm_choice, filename="landvote_query_log.csv", bucket="shared-tpl",
                  key=minio_key, secret=minio_secret,
-                 endpoint="minio.carlboettiger.info"):
+                 endpoint="s3.carlboettiger.info"):
     mc = minio.Minio(endpoint, key, secret)
     mc.fget_object(bucket, filename, filename)
     log = pd.read_csv(filename)
